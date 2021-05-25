@@ -14,9 +14,35 @@
         margin: 0px;
     }
 
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-around;
+
+        position: relative;
+    }
+
+    .tittle P {
+        font-size: 45px;
+        font-weight: bold;
+        color: crimson;
+
+        position: absolute;
+
+        top: 50%;
+        left: 3%;
+
+        z-index: 2;
+    }
+
     .banner {
         width: 70%;
-        margin: 0px 0px auto auto;
+        margin: 0 0 auto auto;
     }
 
     .imgbox {
@@ -41,44 +67,235 @@
     .imgbox:before {
         content: "";
         display: inline-block;
-        padding-bottom: 70%;
+        padding-bottom: 60%;
         width: 0.1px;
         /*必須要有數值，否則無法把高度撐起來*/
         vertical-align: middle;
     }
+
+    .community {
+        display: flex;
+        justify-content: flex-end;
+
+        padding: 0.5% 0.5% 1% 0;
+
+    }
+
+    .community>.icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: tomato;
+
+        margin: 0px 3px;
+    }
+
+    .news {
+        height: 350px;
+        width: 100%;
+
+        background-color: #eeeeee;
+
+        margin-top: 50px;
+    }
+
+    .picbox {
+        height: 70%;
+        width: 20%;
+
+        background-color: rgb(0, 0, 0);
+        margin: 0px 5px;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    .picbox img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+
+        margin: auto;
+        z-index: -1;
+        *zoom: 1;
+    }
+
+    .picbox:before {
+        content: "";
+        display: inline-block;
+        padding-bottom: 0%;
+        width: 0.1px;
+        /*必須要有數值，否則無法把高度撐起來*/
+        vertical-align: middle;
+    }
+
+    .maincontent {
+        width: 100%;
+        height: auto;
+
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .toptittle {
+
+        width: 60%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .toptittle>.tittle {
+        width: 20%;
+        height: 50px;
+
+        background-color: rgb(212, 212, 212);
+
+        margin-top: 10%;
+    }
+
+    .toptittle>.tittle:hover {
+
+        background-color: rgb(192, 192, 192);
+    }
+
+    .outbox {
+        width: 60%;
+        height: auto;
+
+        background-color: rgb(185, 185, 185);
+
+        display: flex;
+        justify-content: center;
+
+        padding: 50px 0;
+
+
+
+    }
+
+    .outbox>.centerbox {
+        width: 90%;
+
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-around;
+    }
+
+    .outbox>.centerbox :last-child {
+
+        background-color: rgb(157, 224, 101);
+    }
+
+    .centerbox>.centerpic {
+        width: 500px;
+        height: 250px;
+
+        border: solid 1px;
+        margin: 5px;
+
+    }
+
+    .footer {
+        margin-top: 150px;
+        height: 50px;
+
+        background-color: grey;
+    }
+
+    @media (max-width:1100px) {
+        .toptittle {
+            width: 30%;
+        }
+
+        .toptittle>.tittle {
+            width: 100%;
+            height: 50px;
+
+            margin-top: 1%;
+        }
+
+        .outbox {
+            width: 70%;
+            height: 250px;
+        }
+
+        .outbox>.centerbox {
+            
+        }
+
+        .outbox>.centerbox :first-child {
+
+        }
 </style>
 
 
 <body>
+    <div class="top">
+        <div class="tittle">
+            <p>ばどの場所ばどばどの場所ばどの場所</p>
+        </div>
 
-    <div class="banner">
-        <div class="imgbox">
-            <img src="../02_素材/20210220_matte_painting_fantasy.png">
+        <div class="banner">
+            <div class="imgbox">
+                <img src="../02_素材/EfnkpJQUEAIxAiQ.jpg">
+            </div>
         </div>
     </div>
 
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
-    <p>11</p>
-    <P>dcc</P>
+    <div class="community">
+        <div class="icon center">Tw</div>
+        <div class="icon center">P</div>
+        <div class="icon center">FB</div>
+    </div>
+
+
+    <div class="news center">
+        <div class="picbox">
+            <img src="../02_素材/20210522.png">
+        </div>
+        <div class="picbox">
+            <img src="../02_素材/20210220_matte_painting_fantasy.png">
+        </div>
+        <div class="picbox">
+            <img src="../02_素材/20201119_doppo.png">
+        </div>
+        <div class="picbox">
+            <img src="../02_素材/20210522_點圖.png">
+        </div>
+        <div class="picbox">
+            <img src="../02_素材/20210522.png">
+        </div>
+    </div>
+
+    <div class="maincontent center">
+
+        <div class="toptittle">
+            <div class="tittle center">people</div>
+            <div class="tittle center">background</div>
+            <div class="tittle center">plurkcoinegg</div>
+            <div class="tittle center">doddles</div>
+            <div class="tittle center">web</div>
+        </div>
+
+        <div class="outbox">
+            <div class="centerbox">
+                <div class="centerpic"></div>
+                <div class="centerpic"></div>
+                <div class="centerpic"></div>
+                <div class="centerpic"></div>
+                <div class="centerpic"></div>
+                <div class="centerpic"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer center">Badoiao</div>
+    </footer>
 
 </body>
 
