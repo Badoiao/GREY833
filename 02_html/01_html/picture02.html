@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片測試pinterest</title>
+</head>
+
+<style>
+    body{
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+    }
+    .menu {
+        height: 70px;
+        width: 100%;
+
+        background-color: rosybrown;
+        margin-bottom: 50px;
+
+        position: fixed;
+    }
+    .blank{
+        height: 100px;
+        width: 100%;
+    }
+
+    .demo-1 {
+        -moz-column-count: 3;
+        /* Firefox */
+        -webkit-column-count: 3;
+        /* Safari 和 Chrome */
+        column-count: 3;
+        -moz-column-gap: 0.5em;
+        -webkit-column-gap: 0.5em;
+        column-gap: 0.5em;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .item {
+        padding: 5em;
+        margin-bottom: 0.5em;
+        -webkit-column-break-inside: avoid;
+        break-inside: avoid;
+        /*防止斷點*/
+        background: #ccc;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <div class="menu"></div>
+    <div class="blank"></div>
+    <div class="demo-1">
+        <div class="item">
+            <div class="item_content content-lar" style="height:100px;"> 1</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:450px;"> 2</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:50px;"> 3</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:200px;"> 4</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:60px;"> 5 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar" style="height:90px;"> 6</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma"> 7</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar" style="height:120px;"> 8</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar"> 9</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:100px;"> 10 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid"> 11 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 12</div>
+        </div>
+
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 13</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 14</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 15</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 16</div>
+        </div>
+
+        <!-- more items -->
+    </div>
+
+</body>
+<script type="text/javascript">
+    // 定義瀑布流演算法函式
+    function fall() {
+        const minGap = 20; // 最小間距，讓每一列的最小空隙可以自定義，避免太過擁擠的情況發生。但是，會通過計算得到真實的間距。
+        const itemWidth = 300; // 每一項的寬度，即當前每一個圖片容器的寬度。保證每一列都是等寬不等高的。
+        const scrollBarWidth = getScrollbarWidth();    // 獲取滾動條的寬度
+        const pageWidth = window.innerWidth - scrollBarWidth; // 獲取當前頁面的寬度 = window.innerWidth - 滾動條的寬度
+        const column = Math.floor(pageWidth / (itemWidth + minGap)); // 實際列數=頁面寬度/(圖片寬度+最小間距)
+        const gap = (pageWidth - itemWidth * column) / column / 2; // 計算真實間距 = (頁面寬度- 圖片寬度*實際列數)/實際列數/2
+        const items = document.querySelectorAll('img'); // 獲取所有的外層元素
+
+        // 獲取滾動條的寬度
+        function getScrollbarWidth() {
+            const oDiv = document.createElement('div');//建立一個div
+            // 給div設定樣式。隨便定義寬高，只要能獲取到滾動條就可以
+            oDiv.style.cssText = `width: 50px;height: 50px;overflowY: scroll;`
+            document.body.appendChild(oDiv);//把div新增到body中
+            const scrollbarWidth = oDiv.offsetWidth - oDiv.clientWidth;// 使最大寬度和可視寬度相減，獲得到滾動條寬度。
+            oDiv.remove();//移除建立的div
+            return scrollbarWidth;//返回滾動條寬度
+        }
+        const heightArr = []; // 定義一個空陣列，儲存最低高度。
+        for (let i = 0; i < items.length; i++) {
+            // 遍歷所有的外層容器
+            const height = items[i].offsetHeight;
+            // 如果當前處在第一行
+            if (i < column) {
+                // 直接設定元素距離上部的位置和距離左邊的距離。
+                items[i].style.cssText = `top: ${gap}px;left: ${(itemWidth + gap) * i + gap}px`;
+                // 儲存當前元素的高度。
+                heightArr.push(height);
+            } else {
+                // 不是第一行的話，就進行比對。                 let minHeight = heightArr[0]; // 先儲存第一項的高度
+                let minIndex = 0; // 儲存第一項的索引值
+                for (let j = 0; j < heightArr.length; j++) {
+                    // 通過迴圈遍歷比對，拿到最小值和最小值的索引。
+                    if (minHeight > heightArr[j]) {
+                        minHeight = heightArr[j];
+                        minIndex = j;
+                    }
+                }
+                // 通過最小值為當前元素設定top值，通過索引為當前元素設定left值。
+                items[i].style.cssText = `top: ${minHeight + gap * 2}px; left: ${(itemWidth + gap) * minIndex + gap}px`;
+                // 並修改當前索引的高度為當前元素的高度
+                heightArr[minIndex] = minHeight + gap + height;
+            }
+        }
+    }
+    // 頁面載入完成呼叫一次。
+    window.onload = fall;
+    // 頁面尺寸發生改變再次呼叫。
+    window.onresize = fall;
+</script>
+
+</html>
